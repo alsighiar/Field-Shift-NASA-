@@ -48,7 +48,7 @@ class DataProcessor:
             if missing_cols:
                 raise ValueError(f"Missing required features for prediction: {missing_cols}")
 
-            logging.info("✅ Live data preprocessed and physics equations applied successfully.")
+            logging.info("Live data preprocessed and physical equations applied successfully.")
             return df[expected_features]
 
         except Exception as e:

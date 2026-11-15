@@ -25,7 +25,7 @@ class PredictiveEngine:
         try:
             model = CatBoostRegressor()
             model.load_model(self.model_path)
-            logging.info("✅ CatBoost Model loaded successfully.")
+            logging.info("CatBoost model loaded successfully.")
             return model
         except Exception as e:
             logging.error(f"Failed to load CatBoost model: {e}")

@@ -30,7 +30,7 @@ class FieldShiftController:
         تشغيل دورة النظام الكاملة (End-to-End Pipeline).
         """
         try:
-            logging.info("🚀 Starting Field Shift Pipeline...")
+            logging.info("Starting Field Shift pipeline.")
             
             # 1. Feature Engineering (Data Processor)
             features_df = DataProcessor.preprocess_live_data(raw_input_data)
@@ -56,7 +56,7 @@ class FieldShiftController:
             )
             
             # 5. تجميع النتائج وإرسالها للواجهة
-            logging.info("✅ Pipeline executed successfully.")
+            logging.info("Pipeline executed successfully.")
             return {
                 "ai_baseline": ai_baseline,
                 "sensor_reading": live_sensor_reading,
@@ -67,5 +67,5 @@ class FieldShiftController:
             }
             
         except Exception as e:
-            logging.error(f"❌ Pipeline failed: {e}")
+            logging.error(f"Pipeline failed: {e}")
             raise e

@@ -22,7 +22,7 @@ class RAGAgent:
         try:
             embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
             vector_store = FAISS.load_local(self.faiss_path, embeddings, allow_dangerous_deserialization=True)
-            logging.info("✅ FAISS Vector DB loaded successfully.")
+            logging.info("FAISS vector database loaded successfully.")
             return vector_store.as_retriever(search_kwargs={"k": 3})
         except Exception as e:
             logging.error(f"Failed to load FAISS index from {self.faiss_path}: {e}")
@@ -58,22 +58,22 @@ class RAGAgent:
             for model_name in self.candidate_models:
                 for attempt in range(1, 4):
                     try:
-                        logging.info(f"📡 Calling {model_name} (Attempt {attempt}/3)...")
+                        logging.info(f"Calling {model_name} (attempt {attempt}/3).")
                         response = self.client.models.generate_content(
                             model=model_name,
                             contents=prompt
                         )
-                        logging.info(f"✅ RAG Explanation generated successfully via {model_name}.")
+                        logging.info(f"RAG explanation generated successfully via {model_name}.")
                         return response.text.strip()
                     
                     except Exception as e:
                         err_msg = str(e)
                         if "503" in err_msg or "429" in err_msg or "UNAVAILABLE" in err_msg:
                             wait_time = attempt * 2
-                            logging.warning(f"⏳ Server busy. Waiting {wait_time}s before retry...")
+                            logging.warning(f"Server busy. Waiting {wait_time}s before retry.")
                             time.sleep(wait_time)
                         else:
-                            logging.warning(f"⏭️ Skipping {model_name} due to error: {err_msg[:60]}...")
+                            logging.warning(f"Skipping {model_name} due to error: {err_msg[:60]}...")
                             break 
             
             error_msg = "System is currently experiencing high load. Please rely on the basic AI recommendation." if lang == "en" else "النظام يواجه ضغطاً حالياً. يرجى الاعتماد على التوصية الأساسية."

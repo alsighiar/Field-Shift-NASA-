@@ -24,7 +24,7 @@ class RuleEngine:
         try:
             with open(self.json_path, 'r', encoding='utf-8') as f:
                 db = json.load(f)
-                logging.info("✅ Crops Knowledge Base loaded successfully.")
+                logging.info("Crop knowledge base loaded successfully.")
                 return db
         except Exception as e:
             logging.error(f"Failed to load JSON database: {e}")
